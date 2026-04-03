@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI That Sees, Hears & Reasons — On Your PC | Gemma Live Demo</title>
+  <link rel="stylesheet" href="/static/main.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <h1>🤖 Gemma Live</h1>
+        <span style="font-size:0.75rem;color:var(--text-dim);">On-device AI • Sees • Hears • Reasons</span>
+      </div>
+      <div id="status-bar">
+        <span id="connection-status" class="status disconnected">Disconnected</span>
+        <span id="model-name"></span>
+        <span id="latency-display" style="color: var(--text-dim); font-size: 0.75rem;"></span>
+      </div>
+    </header>
+
+    <main>
+      <div id="video-container">
+        <video id="camera-feed" autoplay muted playsinline></video>
+        <canvas id="video-canvas" style="display:none;"></canvas>
+        <div id="video-overlay">
+          <button id="toggle-camera">Toggle Camera</button>
+        </div>
+        <div id="avatar-placeholder" class="avatar-placeholder">
+          <svg viewBox="0 0 100 100" width="120" height="120">
+            <circle cx="50" cy="50" r="45" fill="#252525" stroke="#7c6af5" stroke-width="2"/>
+            <circle cx="35" cy="40" r="6" fill="#7c6af5"/>
+            <circle cx="65" cy="40" r="6" fill="#7c6af5"/>
+            <path d="M30 62 Q50 76 70 62" stroke="#a78bfa" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </svg>
+          <p>Gemma is listening</p>
+        </div>
+      </div>
+
+      <div id="chat-container">
+        <div id="suggestions" class="suggestions">
+          <button class="suggestion-chip" data-prompt="Explain what you can see in French">👁️ Describe this (French)</button>
+          <button class="suggestion-chip" data-prompt="What is 2+2 and why is it important?">🧠 Quick math</button>
+          <button class="suggestion-chip" data-prompt="Help me write a short poem about AI">✍️ Write a poem</button>
+          <button class="suggestion-chip" data-prompt="What are 3 fun facts about space?">🚀 Fun facts</button>
+        </div>
+        <div id="chat-history"></div>
+        <div id="transcription-display" class="transcription hidden"></div>
+        <div id="thinking-indicator" class="hidden">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          Gemma is thinking...
+        </div>
+        <form id="chat-form">
+          <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off" />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <button id="mic-btn" class="mic-btn">
+        <svg id="mic-icon" viewBox="0 0 24 24" width="24" height="24">
+          <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+          <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+        </svg>
+        <svg id="mic-off-icon" viewBox="0 0 24 24" width="24" height="24" style="display:none;">
+          <path d="M19 11h-1.7c0 .74-.16 1.43-.43 2.05l1.23 1.23c.56-.98.9-2.09.9-3.28zm-4.02.17c0-.06.02-.11.02-.17V5c0-1.66-1.34-3-3-3S9 3.34 9 5v.18l5.98 5.99zM4.27 3L3 4.27l6.01 6.01V11c0 1.66 1.33 3 2.99 3 .22 0 .44-.03.65-.08l1.66 1.66c-.71.33-1.5.52-2.31.52-2.76 0-5.3-2.1-5.3-5.1H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c.91-.13 1.77-.45 2.54-.9L19.73 21 21 19.73 4.27 3z"/>
+        </svg>
+      </button>
+      <div id="audio-visualizer">
+        <div id="audio-level-bar"></div>
+      </div>
+      <span id="audio-label">Click mic or press Space to talk</span>
+    </footer>
+  </div>
+
+  <script src="/static/gemma-client.js"></script>
+  <script src="/static/media-handler.js"></script>
+  <script src="/static/pcm-processor.js"></script>
+  <script src="/static/main.js"></script>
+</body>
+</html>
